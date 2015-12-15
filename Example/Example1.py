@@ -84,6 +84,8 @@ def example1():
     # from bc01 to cb01
     input = np.transpose( input, [ 1, 0, 2, 3 ])         
     output = np.transpose( output, [ 1, 0, 2, 3 ])
+
+    # print input.shape # (3, 25, 32, 32)
     
     # flatten
     input = input.reshape( [ 3, 25, 32*32 ])
@@ -91,7 +93,9 @@ def example1():
 
     # transform to fit tile_raster_images    
     input = tuple( [ input[i] for i in xrange(3)] + [None] )    
-    output = tuple( [ output[i] for i in xrange(3)] + [None] )   
+    output = tuple( [ output[i] for i in xrange(3)] + [None] )
+    print input[0][0]
+    print output[0][0]
     
     input_map = tile_raster_images( input, img_shape = (32,32), tile_shape = (5,5), 
                                    tile_spacing=(1, 1), scale_rows_to_unit_interval=True, 
@@ -100,8 +104,7 @@ def example1():
     output_map = tile_raster_images( output, img_shape = (32,32), tile_shape = (5,5), 
                                    tile_spacing=(1, 1), scale_rows_to_unit_interval=True, 
                                     output_pixel_vals=True)
-    
-    bigmap = np.append( input_map, output_map, axis = 1 )      
+    bigmap = np.append( input_map, output_map, axis = 1 )
 
     plt.imshow(bigmap)
     plt.show()

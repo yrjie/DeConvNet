@@ -17,6 +17,8 @@ if class_path not in sys.path:
 from CPRStage import CPRStage_Up,CPRStage_Down
 from Layers import ConvPoolLayer,relu_nonlinear
 
+theano.config.floatX = 'float32'
+
 def activation( a ):
     return ( np.abs(a) + a ) /2
     
